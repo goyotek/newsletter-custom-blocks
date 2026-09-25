@@ -38,7 +38,7 @@ if ($media) {
 <table border="0" cellpadding="0" align="center" cellspacing="0" width="100%" class="responsive">
     <tr>
         <td inline-class="title-td">
-            <?php echo $title ?>
+            <div inline-class="title" dir="<?php echo esc_attr($dir) ?>" role="heading"><?php echo $title ?></div>
         </td>
     </tr>
     <?php if ($media) { ?>

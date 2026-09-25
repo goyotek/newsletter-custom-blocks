@@ -51,12 +51,12 @@ $items = [];
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tr>
         <td align="<?php echo esc_attr($align_left) ?>" inline-class="title-td">
-            <?php echo $title ?>
+            <div inline-class="title" dir="<?php echo esc_attr($dir) ?>" role="heading"><?php echo $title ?></div>
         </td>
     </tr>
     <tr>
-        <td align="<?php echo esc_attr($align_left) ?>" dir="<?php echo esc_attr($dir) ?>" inline-class="excerpt-td">
-            <?php echo $text ?>
+        <td align="<?php echo esc_attr($align_left) ?>" inline-class="excerpt-td">
+            <div inline-class="excerpt" dir="<?php echo esc_attr($dir) ?>" role="paragraph"><?php echo $text ?></div>
         </td>
     </tr>
     <?php if ($show_button) { ?>

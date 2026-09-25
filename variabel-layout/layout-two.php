@@ -63,12 +63,12 @@ ob_start();
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
     <tr>
         <td align="center" inline-class="title-td">
-            <?php echo $title ?>
+            <div inline-class="title" dir="<?php echo esc_attr($dir) ?>" role="heading"><?php echo $title ?></div>
         </td>
     </tr>
     <tr>
         <td align="center" inline-class="excerpt-td">
-            <?php echo $text ?>
+            <div inline-class="excerpt" dir="<?php echo esc_attr($dir) ?>" role="paragraph"><?php echo $text ?></div>
         </td>
     </tr>
     <?php if ($show_button) { ?>
