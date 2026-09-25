@@ -58,40 +58,34 @@ if (!empty($options['image']['id'])) {
     $media = tnp_resize_2x($options['image']['id'], [$composer['content_width'], 0]);
 }
 
-// Renders the CTA button using the block own options (padding, colors, font) since the TNP_Composer::button()
-// helper uses its own fixed padding. Declared once, block.php can be included more times per email rendering.
-if (!function_exists('variabel_layout_button')) {
+// Fully inline styles generated from the block options, with the newsletter global styles as
+// fallback, so nothing depends on <style> blocks or class to style conversion.
+$title_style = 'font-family: ' . esc_attr(!empty($options['title_font_family']) ? $options['title_font_family'] : $composer['title_font_family']) . ';'
+        . ' font-size: ' . esc_attr(!empty($options['title_font_size']) ? $options['title_font_size'] : $composer['title_font_size']) . 'px;'
+        . ' font-weight: ' . esc_attr(!empty($options['title_font_weight']) ? $options['title_font_weight'] : $composer['title_font_weight']) . ';'
+        . ' color: ' . esc_attr(!empty($options['title_font_color']) ? $options['title_font_color'] : $composer['title_font_color']) . ';'
+        . ' line-height: 130%; margin: 0;';
 
-    function variabel_layout_button($options, $composer, $align = 'center') {
-        if (empty($options['button_text'])) {
-            return '';
-        }
+$text_style = 'font-family: ' . esc_attr(!empty($options['text_font_family']) ? $options['text_font_family'] : $composer['text_font_family']) . ';'
+        . ' font-size: ' . esc_attr(!empty($options['text_font_size']) ? $options['text_font_size'] : $composer['text_font_size']) . 'px;'
+        . ' font-weight: ' . esc_attr(!empty($options['text_font_weight']) ? $options['text_font_weight'] : $composer['text_font_weight']) . ';'
+        . ' color: ' . esc_attr(!empty($options['text_font_color']) ? $options['text_font_color'] : $composer['text_font_color']) . ';'
+        . ' line-height: 150%; margin: 0;';
 
-        $background = empty($options['button_background']) ? $composer['button_background_color'] : $options['button_background'];
-        $font_family = empty($options['button_font_family']) ? $composer['button_font_family'] : $options['button_font_family'];
-        $font_size = empty($options['button_font_size']) ? $composer['button_font_size'] : $options['button_font_size'];
-        $font_weight = empty($options['button_font_weight']) ? $composer['button_font_weight'] : $options['button_font_weight'];
-        $font_color = !empty($options['button_font_color']) ? $options['button_font_color'] : $options['button_color'];
-        $font_color = !empty($font_color) ? $font_color : $composer['button_font_color'];
-
-        $padding_vertical = (int) $options['button_padding_vertical'];
-        $padding_horizontal = (int) $options['button_padding_horizontal'];
-
-        $b = '<table border="0" cellpadding="0" cellspacing="0" role="presentation" align="' . esc_attr($align) . '" style="border-collapse: separate !important; line-height: 100%; width: auto;">';
-        $b .= '<tbody><tr>';
-        $b .= '<td align="center" bgcolor="' . esc_attr($background) . '" role="presentation" style="border-collapse: separate !important; cursor: auto; mso-padding-alt: ' . $padding_vertical . 'px ' . $padding_horizontal . 'px; background: ' . esc_attr($background) . '; border-radius: 0px;" valign="middle">';
-        $b .= '<a href="' . esc_url($options['button_link']) . '"';
-        $b .= ' style="display: inline-block; color: ' . esc_attr($font_color) . '; font-family: ' . esc_attr($font_family) . '; font-size: ' . esc_attr($font_size) . 'px; font-weight: ' . esc_attr($font_weight) . '; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: ' . $padding_vertical . 'px ' . $padding_horizontal . 'px; mso-padding-alt: 0px; border-radius: 0px; width: auto;"';
-        $b .= ' target="_blank">';
-        $b .= esc_html($options['button_text']);
-        $b .= '</a>';
-        $b .= '</td></tr></tbody></table>';
-
-        return $b;
-    }
+if (!empty($options['text_font_align'])) {
+    $text_style .= ' text-align: ' . esc_attr($options['text_font_align']) . ';';
 }
 
-$button_options = $options;
+$button_style = 'display: inline-block;'
+        . ' color: ' . esc_attr(!empty($options['button_color']) ? $options['button_color'] : $composer['button_font_color']) . ';'
+        . ' font-family: ' . esc_attr(!empty($options['button_font_family']) ? $options['button_font_family'] : $composer['button_font_family']) . ';'
+        . ' font-size: ' . esc_attr(!empty($options['button_font_size']) ? $options['button_font_size'] : $composer['button_font_size']) . 'px;'
+        . ' font-weight: ' . esc_attr(!empty($options['button_font_weight']) ? $options['button_font_weight'] : $composer['button_font_weight']) . ';'
+        . ' line-height: 120%; margin: 0; text-decoration: none; text-transform: none;'
+        . ' padding: ' . (int) $options['button_padding_vertical'] . 'px ' . (int) $options['button_padding_horizontal'] . 'px;'
+        . ' mso-padding-alt: 0px; border-radius: 0px;';
+
+$button_background = !empty($options['button_background']) ? $options['button_background'] : $composer['button_background_color'];
 
 if ($options['layout'] == 'one') {
     include __DIR__ . '/layout-one.php';

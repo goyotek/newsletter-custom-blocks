@@ -4,46 +4,10 @@
  */
 $total_width = $composer['content_width'];
 $column_width = $total_width / 2 - 20;
-
-$title_style = TNP_Composer::get_title_style($options, 'title', $composer, ['scale' => .8]);
-$text_style = TNP_Composer::get_text_style($options, 'text', $composer);
-
 $items = [];
 ?>
-<style>
-    .title-td {
-        padding: 15px 0 0 0;
-    }
-    .title {
-        <?php $title_style->echo_css() ?>
-        line-height: 1.3;
-        text-decoration: none;
-    }
-    .excerpt-td {
-        padding: 5px 0 0 0;
-    }
-    .excerpt {
-        <?php $text_style->echo_css() ?>
-        line-height: 1.4;
-        text-decoration: none;
-    }
-    .button {
-        padding: 15px 0;
-    }
-    .column-left {
-        padding-right: 10px;
-        padding-bottom: 20px;
-    }
-    .column-right {
-        padding-left: 10px;
-        padding-bottom: 20px;
-    }
-</style>
-<?php
-
-if ($media) {
-    ob_start();
-    ?>
+<?php if ($media) { ?>
+    <?php ob_start(); ?>
     <table cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr>
             <td align="center" valign="middle">
@@ -54,32 +18,35 @@ if ($media) {
             </td>
         </tr>
     </table>
-    <?php
-    $items[] = ob_get_clean();
-}
-
-ob_start();
-?>
+    <?php $items[] = ob_get_clean(); ?>
+<?php } ?>
+<?php ob_start(); ?>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
     <tr>
-        <td align="center" inline-class="title-td">
-            <div inline-class="title" dir="<?php echo esc_attr($dir) ?>" role="heading"><?php echo $title ?></div>
+        <td align="center" style="padding: 15px 0 0 0;">
+            <div style="<?php echo $title_style ?>" dir="<?php echo esc_attr($dir) ?>" role="heading"><?php echo $title ?></div>
         </td>
     </tr>
     <tr>
-        <td align="center" inline-class="excerpt-td">
-            <div inline-class="excerpt" dir="<?php echo esc_attr($dir) ?>" role="paragraph"><?php echo $text ?></div>
+        <td align="center" style="padding: 5px 0 0 0;">
+            <div style="<?php echo $text_style ?>" dir="<?php echo esc_attr($dir) ?>" role="paragraph"><?php echo $text ?></div>
         </td>
     </tr>
     <?php if ($show_button) { ?>
         <tr>
-            <td align="center" inline-class="button">
-                <?php echo variabel_layout_button($button_options, $composer, 'center') ?>
+            <td align="center" style="padding: 15px 0;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="center" style="border-collapse: separate !important; line-height: 100%; width: auto;">
+                    <tbody>
+                        <tr>
+                            <td align="center" bgcolor="<?php echo esc_attr($button_background) ?>" role="presentation" style="border-collapse: separate !important; cursor: auto; mso-padding-alt: <?php echo (int) $options['button_padding_vertical'] ?>px <?php echo (int) $options['button_padding_horizontal'] ?>px; background: <?php echo esc_attr($button_background) ?>; border-radius: 0px;" valign="middle">
+                                <a href="<?php echo esc_url($options['button_link']) ?>" style="<?php echo $button_style ?>" target="_blank"><?php echo esc_html($options['button_text']) ?></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </td>
         </tr>
     <?php } ?>
 </table>
-<?php
-$items[] = ob_get_clean();
-
-echo TNP_Composer::grid($items, ['width' => $total_width, 'responsive' => true, 'padding' => 5]);
+<?php $items[] = ob_get_clean(); ?>
+<?php echo TNP_Composer::grid($items, ['width' => $total_width, 'responsive' => true, 'padding' => 5]) ?>

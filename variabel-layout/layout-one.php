@@ -4,33 +4,6 @@
  */
 $total_width = $composer['content_width'];
 $column_width = $total_width / 2 - 10;
-
-$title_style = TNP_Composer::get_title_style($options, 'title', $composer, ['scale' => .8]);
-$text_style = TNP_Composer::get_text_style($options, 'text', $composer);
-?>
-<style>
-    .title-td {
-        padding: 0 0 5px 0;
-    }
-    .title {
-        <?php $title_style->echo_css() ?>
-        line-height: normal !important;
-        text-decoration: none;
-    }
-    .excerpt-td {
-        padding: 10px 0 15px 0;
-    }
-    .excerpt {
-        <?php $text_style->echo_css() ?>
-        line-height: 1.5 !important;
-        text-decoration: none;
-    }
-    .button {
-        padding: 15px 0;
-    }
-</style>
-<?php
-
 $items = [];
 ?>
 <?php if ($media) { ?>
@@ -50,19 +23,27 @@ $items = [];
 <?php ob_start() ?>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tr>
-        <td align="<?php echo esc_attr($align_left) ?>" inline-class="title-td">
-            <div inline-class="title" dir="<?php echo esc_attr($dir) ?>" role="heading"><?php echo $title ?></div>
+        <td align="<?php echo esc_attr($align_left) ?>" style="padding: 0 0 5px 0;">
+            <div style="<?php echo $title_style ?>" dir="<?php echo esc_attr($dir) ?>" role="heading"><?php echo $title ?></div>
         </td>
     </tr>
     <tr>
-        <td align="<?php echo esc_attr($align_left) ?>" inline-class="excerpt-td">
-            <div inline-class="excerpt" dir="<?php echo esc_attr($dir) ?>" role="paragraph"><?php echo $text ?></div>
+        <td align="<?php echo esc_attr($align_left) ?>" style="padding: 10px 0 15px 0;">
+            <div style="<?php echo $text_style ?>" dir="<?php echo esc_attr($dir) ?>" role="paragraph"><?php echo $text ?></div>
         </td>
     </tr>
     <?php if ($show_button) { ?>
         <tr>
-            <td align="<?php echo esc_attr($align_left) ?>" inline-class="button">
-                <?php echo variabel_layout_button($button_options, $composer, $align_left) ?>
+            <td align="<?php echo esc_attr($align_left) ?>" style="padding: 15px 0;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="<?php echo esc_attr($align_left) ?>" style="border-collapse: separate !important; line-height: 100%; width: auto;">
+                    <tbody>
+                        <tr>
+                            <td align="center" bgcolor="<?php echo esc_attr($button_background) ?>" role="presentation" style="border-collapse: separate !important; cursor: auto; mso-padding-alt: <?php echo (int) $options['button_padding_vertical'] ?>px <?php echo (int) $options['button_padding_horizontal'] ?>px; background: <?php echo esc_attr($button_background) ?>; border-radius: 0px;" valign="middle">
+                                <a href="<?php echo esc_url($options['button_link']) ?>" style="<?php echo $button_style ?>" target="_blank"><?php echo esc_html($options['button_text']) ?></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </td>
         </tr>
     <?php } ?>
