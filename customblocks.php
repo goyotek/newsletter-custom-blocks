@@ -16,10 +16,11 @@
 // The action is fired only when Newsletter needs the blocks so there is no overhead.
 
 add_action('newsletter_register_blocks', function () {
-    // Register both blocks
+    // Register blocks
     TNP_Composer::register_block(__DIR__ . '/dummy');
     TNP_Composer::register_block(__DIR__ . '/img-txt-cta');
     TNP_Composer::register_block(__DIR__ . '/img-txt');
+    TNP_Composer::register_block(__DIR__ . '/variabel-layout');
 });
 
 
