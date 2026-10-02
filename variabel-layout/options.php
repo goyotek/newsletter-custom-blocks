@@ -23,7 +23,7 @@ $fields->select('layout', __('Layout', 'newsletter'),
 
 <?php $fields->text('title', 'Title') ?>
 
-<?php $fields->font('title_font', 'Title font', ['family_default' => true, 'size_default' => true, 'weight_default' => true]) ?>
+<?php $fields->font('title_font', 'Title font', ['align' => true, 'family_default' => true, 'size_default' => true, 'weight_default' => true]) ?>
 
 <?php $fields->textarea('text', 'Text') ?>
 
