@@ -43,6 +43,15 @@ $fields->select('layout', __('Layout', 'newsletter'),
 
 <?php $fields->font('button_font', 'Button Font', ['family_default' => true, 'size_default' => true, 'weight_default' => true, 'color_default' => false]) ?>
 
+<?php
+$fields->select('button_align', __('Button alignment', 'newsletter'),
+        [
+            'left' => __('Left', 'newsletter'),
+            'center' => __('Center', 'newsletter'),
+            'right' => __('Right', 'newsletter')
+        ]);
+?>
+
 <?php $fields->padding('text_padding', 'Text padding', ['description' => 'Supported only by some layouts', 'show_top' => false, 'show_bottom' => false]) ?>
 
 <?php
