@@ -34,8 +34,8 @@ $items = [];
     </tr>
     <?php if ($show_button) { ?>
         <tr>
-            <td align="center" style="padding: 15px 0;">
-                <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="center" style="border-collapse: separate !important; line-height: 100%; width: auto;">
+            <td align="<?php echo esc_attr($button_align) ?>" style="padding: 15px 0;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="<?php echo esc_attr($button_align) ?>" style="border-collapse: separate !important; line-height: 100%; width: auto;">
                     <tbody>
                         <tr>
                             <td align="center" bgcolor="<?php echo esc_attr($button_background) ?>" role="presentation" style="border-collapse: separate !important; cursor: auto; mso-padding-alt: <?php echo (int) $options['button_padding_vertical'] ?>px <?php echo (int) $options['button_padding_horizontal'] ?>px; background: <?php echo esc_attr($button_background) ?>; border-radius: 0px;" valign="middle">

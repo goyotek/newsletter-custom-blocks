@@ -19,6 +19,7 @@ $defaults = array(
     'title_font_size' => '',
     'title_font_weight' => '',
     'title_font_color' => '',
+    'title_font_align' => '',
     'text' => 'Your nice text to describe whatever you want to describe.',
     'text_font_family' => '',
     'text_font_size' => '',
@@ -29,6 +30,7 @@ $defaults = array(
     'button_link' => '#',
     'button_background' => '#b31e55',
     'button_color' => '#f3f6f4',
+    'button_align' => 'center',
     'button_padding_vertical' => 10,
     'button_padding_horizontal' => 25,
     'button_font_family' => '',
@@ -66,6 +68,10 @@ $title_style = 'font-family: ' . esc_attr(!empty($options['title_font_family']) 
         . ' color: ' . esc_attr(!empty($options['title_font_color']) ? $options['title_font_color'] : $composer['title_font_color']) . ';'
         . ' line-height: 130%; margin: 0;';
 
+if (!empty($options['title_font_align'])) {
+    $title_style .= ' text-align: ' . esc_attr($options['title_font_align']) . ';';
+}
+
 $text_style = 'font-family: ' . esc_attr(!empty($options['text_font_family']) ? $options['text_font_family'] : $composer['text_font_family']) . ';'
         . ' font-size: ' . esc_attr(!empty($options['text_font_size']) ? $options['text_font_size'] : $composer['text_font_size']) . 'px;'
         . ' font-weight: ' . esc_attr(!empty($options['text_font_weight']) ? $options['text_font_weight'] : $composer['text_font_weight']) . ';'
@@ -86,6 +92,7 @@ $button_style = 'display: inline-block;'
         . ' mso-padding-alt: 0px; border-radius: 0px;';
 
 $button_background = !empty($options['button_background']) ? $options['button_background'] : $composer['button_background_color'];
+$button_align = in_array($options['button_align'], ['left', 'center', 'right'], true) ? $options['button_align'] : 'center';
 
 if ($options['layout'] == 'one') {
     include __DIR__ . '/layout-one.php';
