@@ -29,6 +29,8 @@ $fields->select('layout', __('Layout', 'newsletter'),
 
 <?php $fields->font('text_font', 'Text font', ['align' => true, 'family_default' => true, 'size_default' => true, 'weight_default' => true]) ?>
 
+<?php $fields->checkbox('show_button', 'Show button') ?>
+
 <?php $fields->text('button_text', 'Button Text') ?>
 
 <?php $fields->url('button_link', 'Button Link') ?>

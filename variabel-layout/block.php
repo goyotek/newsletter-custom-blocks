@@ -26,6 +26,7 @@ $defaults = array(
     'text_font_weight' => '',
     'text_font_color' => '',
     'text_font_align' => '',
+    'show_button' => 1,
     'button_text' => 'Click Here',
     'button_link' => '#',
     'button_background' => '#b31e55',
@@ -51,7 +52,7 @@ $options = array_merge($defaults, $options);
 $title = wp_kses_post($options['title']);
 $text = wp_kses_post($options['text']);
 
-$show_button = !empty($options['button_text']);
+$show_button = !empty($options['show_button']) && !empty($options['button_text']);
 
 // The $media is an object containing the image URL and the size to specify in the HTML tag. The image is resized at
 // 2x to be sharp on mobile devices. Layouts shrink it with set_width() when a smaller image is needed.
