@@ -36,6 +36,15 @@ $options = array_merge($default_options, $options);
 $title_style = TNP_Composer::get_title_style($options, 'title', $composer);
 $text_style = TNP_Composer::get_text_style($options, 'text', $composer);
 
+$button_style = 'display: inline-block;'
+        . ' color: ' . esc_attr(!empty($options['button_color']) ? $options['button_color'] : $composer['button_font_color']) . ';'
+        . ' font-family: ' . esc_attr(!empty($options['button_font_family']) ? $options['button_font_family'] : $composer['button_font_family']) . ';'
+        . ' font-size: ' . esc_attr(!empty($options['button_font_size']) ? $options['button_font_size'] : $composer['button_font_size']) . 'px;'
+        . ' font-weight: ' . esc_attr(!empty($options['button_font_weight']) ? $options['button_font_weight'] : $composer['button_font_weight']) . ';'
+        . ' line-height: 120%; margin: 0; text-decoration: none; text-transform: none;'
+        . ' padding: ' . (int) $options['button_padding_vertical'] . 'px ' . (int) $options['button_padding_horizontal'] . 'px;'
+        . ' mso-padding-alt: 0px; border-radius: 0px;';
+
 // Image preparation (again, that is a bit tricky...)
 
 $media = null;
@@ -92,9 +101,9 @@ if (!empty($options['image']['id'])) {
                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="center" style="border-collapse: separate !important; line-height: 100%; width: auto; margin-top: 20px;">
                         <tbody>
                             <tr>
-                                <td align="center" bgcolor="<?php echo esc_attr($options['button_background']); ?>" role="presentation" style="border-collapse: separate !important; cursor: auto; mso-padding-alt: <?php echo esc_attr($options['button_padding_vertical']); ?>px <?php echo esc_attr($options['button_padding_horizontal']); ?>px; background: <?php echo esc_attr($options['button_background']); ?>; border-radius: 0px; border: 1px solid #bcbcbc;" valign="middle">
+                                <td align="center" bgcolor="<?php echo esc_attr($options['button_background']); ?>" role="presentation" style="cursor: auto; mso-padding-alt: <?php echo esc_attr($options['button_padding_vertical']); ?>px <?php echo esc_attr($options['button_padding_horizontal']); ?>px; background: <?php echo esc_attr($options['button_background']); ?>; border-radius: 0px;" valign="middle">
                                     <a href="<?php echo esc_url($options['button_link']); ?>"
-                                       style="display: inline-block; color: <?php echo esc_attr($options['button_color']); ?>; font-family: <?php echo esc_attr($options['button_font_family'] ?? 'Lucida Sans Unicode, sans-serif'); ?>; font-size: <?php echo esc_attr(($options['button_font_size'] ?? '16') . 'px'); ?>; font-weight: <?php echo esc_attr($options['button_font_weight'] ?? 'normal'); ?>; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: <?php echo esc_attr($options['button_padding_vertical']); ?>px <?php echo esc_attr($options['button_padding_horizontal']); ?>px; mso-padding-alt: 0px; border-radius: 0px; width: auto;"
+                                       style="<?php echo $button_style ?>"
                                        target="_blank">
                                         <?php echo esc_html($options['button_text']); ?>
                                     </a>
